@@ -1,0 +1,61 @@
+
+<div class="container-fluid" >
+    <form class="row" [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+        <div class="col-md-6">
+            <div *ngFor="let data of Data; let i=index">
+                <label>
+                  <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                  {{data.name}}
+                </label>
+              </div>
+        </div>
+        <div class="col-md-3">
+          <label for="fileSize" class="form-label">Size of the output file(KB)</label>
+          <input type="text" formControlName="fileSize" class="form-control" id="fileSize">
+          <span class="field-validation-valid valdation-error" data-valmsg-for="fileSize" data-valmsg-replace="true"></span>
+        </div>
+      
+        <div class="col-md-6">
+        <button type="submit" class="btn btn-outline-primary">Start</button>
+        <button type="button" (click)="stopGenerateRandom()" class="btn btn-outline-danger">Stop</button>
+        </div>
+     
+      </form>
+</div>
+
+
+<div>
+    <table>
+
+        <tr>
+          <td>
+            Counter 1(Numeric)
+          </td>
+          <td>
+            <label id="numeric">{{counter.counter1}}</label>
+          </td>
+        </tr>   
+
+        <tr> 
+          <td>
+            Counter 2(Alphanumeric)
+          </td>
+          <td>
+          <label id="alphanumeric">{{counter.counter2}}</label>
+          </td>
+        </tr>
+
+<tr>
+    <td>
+      Counter 3(Float)
+    </td>
+    <td>
+      <label id="float">{{counter.counter3}}</label>
+    </td>
+</tr>
+       
+     
+    </table>
+    <button type="button" (click)="reportGenerate()" class="btn btn-outline-primary">Generate Report</button>
+</div>
+
