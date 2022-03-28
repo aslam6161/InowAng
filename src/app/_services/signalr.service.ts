@@ -12,7 +12,7 @@ export class SignalrService {
   counter: BehaviorSubject<Counter>;
 
   constructor() {
-    this.counter = new BehaviorSubject<Counter>({counter1:0,counter2:0,counter3:0});
+    this.counter = new BehaviorSubject<Counter>({ counter1: 0, counter2: 0, counter3: 0 });
   }
 
   // Establish a connection to the SignalR server hub

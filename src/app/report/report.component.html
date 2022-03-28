@@ -1,19 +1,23 @@
-<div class="">
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th>%Numeric</th>
-                <th>%Alphanumeric</th>
-                <th>%Float</th>
-            </tr>
-          
-        </thead>
-        <tbody>
+<div class="row">
+  <div class="col-12 m-auto">
+    <div class="card m-auto">
+      <div class="card-header">Generate Random Object Report</div>
+      <div class="card-body">
+        <table class="table">
           <tr>
-              <td>{{report.numericPercentage}}</td>
-              <td>{{report.alphaNumericPercentage}}</td>
-              <td>{{report.floatPercentage}}</td>
+            <th>% Numeric</th>
+            <th>% Alphanumeric</th>
+            <th>% Float</th>
           </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr>
+              <td>% {{ report.numericPercentage }}</td>
+              <td>% {{ report.alphaNumericPercentage }}</td>
+              <td>% {{ report.floatPercentage }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

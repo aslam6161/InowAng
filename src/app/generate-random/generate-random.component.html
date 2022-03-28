@@ -1,61 +1,92 @@
+<div class="row">
+  <div class="col-12 m-auto">
+    <div class="card m-auto">
+      <div class="card-header">Generate Random Object</div>
+      <div class="card-body">
+        <form class="row" [formGroup]="form" (ngSubmit)="submitForm()">
+          <div class="col-md-6">
+            <div *ngFor="let data of Data; let i = index">
+              <label>
+                <input
+                  type="checkbox"
+                  [value]="data.value"
+                  (change)="onCheckboxChange($event)"
+                />
+                {{ data.name }}
+              </label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="fileSize" class="form-label"
+              >Size of the output file(KB)</label
+            >
+            <input
+              type="number"
+              min="1"
+              formControlName="fileSize"
+              class="form-control"
+              id="fileSize"
+            />
+            <span
+              *ngIf="!fileSize.valid && (fileSize.touched || form)"
+              class="error-block"
+            >
+              Please provide fileSize
+            </span>
+          </div>
 
-<div class="container-fluid" >
-    <form class="row" [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
-        <div class="col-md-6">
-            <div *ngFor="let data of Data; let i=index">
-                <label>
-                  <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
-                  {{data.name}}
-                </label>
-              </div>
-        </div>
-        <div class="col-md-3">
-          <label for="fileSize" class="form-label">Size of the output file(KB)</label>
-          <input type="text" formControlName="fileSize" class="form-control" id="fileSize">
-          <span class="field-validation-valid valdation-error" data-valmsg-for="fileSize" data-valmsg-replace="true"></span>
-        </div>
-      
-        <div class="col-md-6">
-        <button type="submit" class="btn btn-outline-primary">Start</button>
-        <button type="button" (click)="stopGenerateRandom()" class="btn btn-outline-danger">Stop</button>
-        </div>
-     
-      </form>
+          <div class="form-group col-12 mt-3">
+            <button
+              type="submit"
+              class="btn btn-outline-primary"
+              style="margin-right: 5px"
+            >
+              Start
+            </button>
+            <button
+              type="button"
+              (click)="stopGenerateRandom()"
+              class="btn btn-outline-danger"
+            >
+              Stop
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
+<div class="row mt-3">
+  <div class="col-12 m-auto">
+    <div class="card m-auto">
+      <div class="card-header">Live Update</div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <td scope="row">Counter 1 (Numeric)</td>
+              <td colspan="3">{{ counter.counter1 }}</td>
+            </tr>
+            <tr>
+              <td scope="row">Counter 2 (Alphanumeric)</td>
+              <td colspan="3">{{ counter.counter2 }}</td>
+            </tr>
+            <tr>
+              <td scope="row">Counter 3 (Float)</td>
+              <td colspan="3">{{ counter.counter3 }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-<div>
-    <table>
-
-        <tr>
-          <td>
-            Counter 1(Numeric)
-          </td>
-          <td>
-            <label id="numeric">{{counter.counter1}}</label>
-          </td>
-        </tr>   
-
-        <tr> 
-          <td>
-            Counter 2(Alphanumeric)
-          </td>
-          <td>
-          <label id="alphanumeric">{{counter.counter2}}</label>
-          </td>
-        </tr>
-
-<tr>
-    <td>
-      Counter 3(Float)
-    </td>
-    <td>
-      <label id="float">{{counter.counter3}}</label>
-    </td>
-</tr>
-       
-     
-    </table>
-    <button type="button" (click)="reportGenerate()" class="btn btn-outline-primary">Generate Report</button>
+        <button
+          type="button"
+          (click)="reportGenerate()"
+          class="btn btn-outline-primary"
+        >
+          Generate Report
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-
