@@ -17,6 +17,7 @@ export class GenerateRandomComponent implements OnInit {
   counter: Counter = { counter1: 0, counter2: 0, counter3: 0 };
 
   form: FormGroup;
+  enableStop: boolean = false;
 
   Data: Array<any> = [
     { name: 'Numeric', value: 0 },
@@ -58,6 +59,7 @@ export class GenerateRandomComponent implements OnInit {
 
   submitForm() {
     if (this.form.valid) {
+      this.enableStop = true;
       this._signalrService.counter.subscribe((counter: Counter) => {
         this.counter = counter;
       });

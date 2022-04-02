@@ -7,47 +7,31 @@
           <div class="col-md-6">
             <div *ngFor="let data of Data; let i = index">
               <label>
-                <input
-                  type="checkbox"
-                  [value]="data.value"
-                  (change)="onCheckboxChange($event)"
-                />
+                <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
                 {{ data.name }}
               </label>
             </div>
+            <span *ngIf="!this.form.controls['checkArray'].valid && (this.form.controls['checkArray'].touched || form)"
+              class="error-block">
+              Checkbox is required, select atleast one value!
+            </span>
           </div>
           <div class="col-md-3">
-            <label for="fileSize" class="form-label"
-              >Size of the output file(KB)</label
-            >
-            <input
-              type="number"
-              min="1"
-              formControlName="fileSize"
-              class="form-control"
-              id="fileSize"
-            />
-            <span
-              *ngIf="!fileSize.valid && (fileSize.touched || form)"
-              class="error-block"
-            >
-              Please provide fileSize
+            <label for="fileSize" class="form-label">Size of the output file(KB)</label>
+            <input type="number" [ngClass]="{'red-border-class': fileSize.errors}" min="1" formControlName="fileSize"
+              class="form-control" id="fileSize" />
+            <span *ngIf="!fileSize.valid && (fileSize.touched || form)" class="error-block">
+              Please provide file size!
             </span>
           </div>
 
           <div class="form-group col-12 mt-3">
-            <button
-              type="submit"
-              class="btn btn-outline-primary"
-              style="margin-right: 5px"
-            >
+            <button type="submit" [disabled]="!this.form.valid" class="btn btn-outline-primary"
+              style="margin-right: 5px">
               Start
             </button>
-            <button
-              type="button"
-              (click)="stopGenerateRandom()"
-              class="btn btn-outline-danger"
-            >
+            <button type="button" [disabled]="!enableStop" (click)="stopGenerateRandom()"
+              class="btn btn-outline-danger">
               Stop
             </button>
           </div>
@@ -79,11 +63,7 @@
           </tbody>
         </table>
 
-        <button
-          type="button"
-          (click)="reportGenerate()"
-          class="btn btn-outline-primary"
-        >
+        <button type="button" (click)="reportGenerate()" class="btn btn-outline-primary">
           Generate Report
         </button>
       </div>
