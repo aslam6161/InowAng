@@ -11,17 +11,17 @@ export class ReportService {
   constructor(private http: HttpClient) { }
   generateRandom(payload: Payload) {
 
-   console.log(payload);
-    return this.http.post(environment.apiUrl+'/StartGeneratingRandomNumber', payload);
-}
+    console.log(payload);
+    return this.http.post(environment.apiUrl + '/StartGeneratingRandomNumber', payload);
+  }
 
-stopRandom() {
-   return this.http.get(environment.apiUrl+'/Stop');
-}
+  stopRandom() {
+    return this.http.get(environment.apiUrl + '/Stop');
+  }
 
-getReportInfo() {
-  return this.http.get(environment.apiUrl+'/GetReportData');
-}
+  getReportInfo() {
+    return this.http.get(environment.apiUrl + '/GetReportData');
+  }
 
-  
+
 }

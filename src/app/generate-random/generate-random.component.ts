@@ -5,6 +5,7 @@ import { Counter } from '../_models/counter';
 import { AlertifyService } from '../_services/alertify.service';
 import { ReportService } from '../_services/report.service';
 import { SignalrService } from '../_services/signalr.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 
 @Component({
@@ -18,6 +19,8 @@ export class GenerateRandomComponent implements OnInit {
 
   form: FormGroup;
   enableStop: boolean = false;
+  enableReportGen: boolean = false;
+  error: string;
 
   Data: Array<any> = [
     { name: 'Numeric', value: 0 },
@@ -29,7 +32,8 @@ export class GenerateRandomComponent implements OnInit {
     private router: Router,
     private _reportService: ReportService,
     public _signalrService: SignalrService,
-    private alertify: AlertifyService) {
+    private alertify: AlertifyService,
+    private _spinnerService: NgxSpinnerService) {
 
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required]),
@@ -54,7 +58,10 @@ export class GenerateRandomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this._spinnerService.show();
+    setTimeout(() => {
+      this._spinnerService.hide();
+    }, 3000);
   }
 
   submitForm() {
@@ -82,8 +89,13 @@ export class GenerateRandomComponent implements OnInit {
       this._reportService.generateRandom(payload).subscribe((result: any) => {
         if (result != null) {
           this.alertify.success("Genarate Completed");
+          this.enableStop = false;
+          this.enableReportGen = true;
         }
-      });
+      },
+        error => {
+          this.error = error;
+        });
     }
   }
 
@@ -93,7 +105,10 @@ export class GenerateRandomComponent implements OnInit {
         console.log(result);
         this.alertify.warning("Stoped");
       }
-    });
+    },
+      error => {
+        this.error = error;
+      });
   }
 
   reportGenerate() {

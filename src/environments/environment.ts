@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-   apiUrl:'https://localhost:44344/api/RandomReport',
-   signalrUrl:'https://localhost:44344/signalrGenerateRandomHub'
+  apiUrl: 'https://localhost:44344/api/RandomReport',
+  signalrUrl: 'https://localhost:44344/signalrGenerateRandomHub'
 
 };
 

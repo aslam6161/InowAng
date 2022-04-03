@@ -1,3 +1,7 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 1)" template="<img src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />">
+</ngx-spinner>
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+
 <div class="row">
   <div class="col-12 m-auto">
     <div class="card m-auto">
@@ -63,10 +67,12 @@
           </tbody>
         </table>
 
-        <button type="button" (click)="reportGenerate()" class="btn btn-outline-primary">
+        <button [disabled]="!enableReportGen" type="button" (click)="reportGenerate()" class="btn btn-outline-primary">
           Generate Report
         </button>
       </div>
     </div>
   </div>
 </div>
+
+<div class="error-block">{{error}}</div>
