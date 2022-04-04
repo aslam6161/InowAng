@@ -6,6 +6,7 @@ import { AlertifyService } from '../_services/alertify.service';
 import { ReportService } from '../_services/report.service';
 import { SignalrService } from '../_services/signalr.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class GenerateRandomComponent implements OnInit {
   enableStop: boolean = false;
   enableReportGen: boolean = false;
   error: string;
+  configurable: boolean = false;
 
   Data: Array<any> = [
     { name: 'Numeric', value: 0 },
@@ -38,7 +40,22 @@ export class GenerateRandomComponent implements OnInit {
     this.form = this.fb.group({
       checkArray: this.fb.array([], [Validators.required]),
       fileSize: [1, [Validators.required, Validators.min(1)]],
-    });
+      numericP: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+      alphaNumericP: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+      floatP: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+    },
+      {
+        validators: [this.CustomValidator]
+      });
+  }
+
+  CustomValidator(group: FormGroup) {
+    let sum = 0;
+    sum += group.get('numericP')?.value;
+    sum += group.get('alphaNumericP')?.value;
+    sum += group.get('floatP')?.value;
+
+    return sum > 100 ? { notValid: true } : null
   }
 
   onCheckboxChange(e: any) {
@@ -81,7 +98,10 @@ export class GenerateRandomComponent implements OnInit {
 
       const payload = {
         selectedOptions: this.form.value.checkArray.map(Number),
-        fileSize: +this.form.value.fileSize,
+        fileSize: +this.form.value.fileSize,//+ for converting string to int
+        numericP: +this.form.value.numericP,
+        alphaNumericP: +this.form.value.alphaNumericP,
+        floatP: +this.form.value.floatP,
       }
 
       this.alertify.success("Started");
@@ -114,9 +134,22 @@ export class GenerateRandomComponent implements OnInit {
   reportGenerate() {
     this.router.navigate(['/report']);
   }
+  setDistribution() {
+    this.configurable = true;
+  }
 
   get fileSize() {
     return this.form.get('fileSize') as FormControl;
   }
 
+  get numericP() {
+    return this.form.get('numericP') as FormControl;
+  }
+
+  get alphaNumericP() {
+    return this.form.get('alphaNumericP') as FormControl;
+  }
+  get floatP() {
+    return this.form.get('floatP') as FormControl;
+  }
 }

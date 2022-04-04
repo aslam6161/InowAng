@@ -12,11 +12,7 @@ export class ReportComponent implements OnInit {
 
   error: string;
   loaded: boolean = false;
-  report: ReportInfo = { numericPercentage: 0, alphaNumericPercentage: 0, floatPercentage: 0 };
-
-  NumericPercentage: number;
-  AlphaNumericPercentage: number;
-  FloatPercentage: number;
+  report: ReportInfo = { numericPercentage: 0, alphaNumericPercentage: 0, floatPercentage: 0, randomFiles: [] };
 
   constructor(private _reportService: ReportService,
     private _spinnerService: NgxSpinnerService) {

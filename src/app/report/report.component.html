@@ -6,15 +6,32 @@
       <div class="card-body">
         <table class="table">
           <tr>
-            <th>% Numeric</th>
-            <th>% Alphanumeric</th>
-            <th>% Float</th>
+            <td>% Numeric</td>
+            <td>% Alphanumeric</td>
+            <td>% Float</td>
           </tr>
           <tbody>
             <tr>
               <td>% {{ report.numericPercentage }}</td>
               <td>% {{ report.alphaNumericPercentage }}</td>
               <td>% {{ report.floatPercentage }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loaded" class="row mt-3">
+  <div class="col-12 m-auto">
+    <div class="card m-auto">
+      <div class="card-header">Generate Random Object</div>
+      <div class="card-body">
+        <table class="table">
+          <tbody>
+            <tr *ngFor="let item of report.randomFiles">
+              <td> {{ item }}</td>
             </tr>
           </tbody>
         </table>

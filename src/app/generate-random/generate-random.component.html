@@ -29,6 +29,49 @@
             </span>
           </div>
 
+          <div class="col-md-3 mt-3">
+
+            <div *ngIf="!configurable" class="row">
+              <div class="col-12">
+                <a type="button" class="btn btn-outline-info" (click)="setDistribution()">
+                  Setting Distribution
+                </a>
+
+              </div>
+            </div>
+            <div class="row" *ngIf="configurable">
+              <div class="col-12">
+                <label for="numericP" class="form-label">numeric % </label>
+                <input type="number" [ngClass]="{'red-border-class': numericP.errors}" min="0"
+                  formControlName="numericP" class="form-control" id="numericP" />
+                <span *ngIf="!numericP.valid && (numericP.touched || form)" class="error-block">
+                  Please provide numericP!
+                </span>
+              </div>
+              <div class="col-12">
+                <label for="alphaNumericP" class="form-label">alphaNumeric % </label>
+                <input type="number" [ngClass]="{'red-border-class': fileSize.errors}" min="0"
+                  formControlName="alphaNumericP" class="form-control" id="alphaNumericP" />
+                <span *ngIf="!alphaNumericP.valid && (alphaNumericP.touched || form)" class="error-block">
+                  Please provide alphaNumericP!
+                </span>
+              </div>
+              <div class="col-12">
+                <label for="floatP" class="form-label">float % </label>
+                <input type="number" [ngClass]="{'red-border-class': floatP.errors}" min="0" formControlName="floatP"
+                  class="form-control" id="floatP" />
+                <span *ngIf="!floatP.valid && (floatP.touched || form)" class="error-block">
+                  Please provide floatP!
+                </span>
+              </div>
+              <span *ngIf="form.hasError('notValid')" class="error-block">
+                Max sum of percentage allowed is 100!
+              </span>
+
+            </div>
+
+          </div>
+
           <div class="form-group col-12 mt-3">
             <button type="submit" [disabled]="!this.form.valid" class="btn btn-outline-primary"
               style="margin-right: 5px">
